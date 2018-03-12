@@ -52,11 +52,11 @@ margin-bottom:10px;
 select {
 padding: 5px 8px;
 /*border: solid 1px #444444;*/
-height:25px;
-font-size:12px;
 box-shadow: none;
 background: transparent;
 background-image: none;
+font-size: 12px;
+overflow: hidden;
 }
 
 #footer {
