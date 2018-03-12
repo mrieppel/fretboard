@@ -35,7 +35,7 @@ function putScale() {
 	var fscale = makeScale(modear,NOTES[root]); // Full scale
 	var scale = getScaleFrag(fscale,mode); // Scale fragment for pentatonics etc.
 	
-	var boardnotes = findKeyNotes(board,scale);
+	var boardnotes = findScaleNotes(board,scale);
 	var dict = scaleDict(fscale,root);
 	var boardnotes = putLetters(boardnotes,dict);
 	
@@ -48,7 +48,6 @@ function putScale() {
 	}
 }
 
-
 // Takes a full scale (as an array of integers) and the name of a mode, and returns
 // the appropriate scale fragment (for pentatonic scales, blues etc.).  For full
 // diatonic scales, just returns the original scale
@@ -58,9 +57,7 @@ function getScaleFrag(fscale,mode) {
 		case "Min. Pentatonic" : return [fscale[0],fscale[2],fscale[3],fscale[4],fscale[6]];
 		case "Blues" : return [fscale[0],fscale[2],fscale[3],fscale[4],fscale[5],fscale[7]];
 		default : return fscale;
-	
 	}
-
 }
 
 // Main function to collect user input and display the appropriate chord
@@ -77,7 +74,7 @@ function putChord() {
 	var chord = getChord(scale,mode);
 	
 	var board = makeBoard(tuning);
-	var boardnotes = findKeyNotes(board,chord);
+	var boardnotes = findScaleNotes(board,chord);
 	var dict = scaleDict(scale,root);
 	
 	var boardnotes = putLetters(boardnotes,dict);
@@ -111,7 +108,6 @@ function getChord(scale,mode) {
 	}
 }
 
-
 // Takes a scale (array of integers) and a root (e.g. "C"), and returns the appropriate 
 // names for the other notes in the scale (determines whether e.g. C#, represented as an
 // int 1 in the scale, should be called "C#" or "Db"
@@ -143,7 +139,6 @@ function scaleDict(scale,root) {
 	}
 }
 
-
 // Takes a mode (an array specifying the intervals for the scale) and a root note 
 // (represented as integer) and returns the scale (array of integers) starting at the 
 // root and moving up by the specified intervals.
@@ -159,7 +154,7 @@ function makeScale(mode,root) {
 // Takes a full fretboard (each fret labeled with the note it corresponds to) and a scale
 // (as an array of ints) and removes those frets from the fretboard that don't correspond
 // to notes in the given scale
-function findKeyNotes(board,scale) {
+function findScaleNotes(board,scale) {
 	return board.map(function (s) {
 		return s.filter(function (p) {
 			return scale.indexOf(p[1]) >=0;});});
@@ -198,9 +193,7 @@ function putLetters(board,dict) {
 }
 
 
-
 // BELOW ARE FUNCTIONS TO DRAW TO SVG USING D3
-
 
 // Draws the notes each of the 6 strings is tuned to to the left of that string.
 function drawopennotes(id,tuning) {
@@ -219,7 +212,6 @@ function drawopennotes(id,tuning) {
 	
 	y.exit().remove();
 }
-
 
 // Draws the notes corresponding to the given scale or chord onto the fretboard.
 function drawnotes(id,string,frets) {
