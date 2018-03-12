@@ -1,0 +1,71 @@
+body {
+font-family: Verdana, Helvetica, sans-serif;
+color:#444444;
+height:100%;
+}
+
+a:link {color:#4B2EDE;text-decoration:none;}      /* unvisited link */
+a:visited {color:#4B2EDE;text-decoration:none;}  /* visited link */
+a:hover {color:#9D90DC;text-decoration:none;}  /* mouse over link */
+a:active {color:#FFA04D;text-decoration:none;}  /* selected link */
+
+
+#content {
+width:800px;
+margin-left:auto;
+margin-right:auto;
+font-size:14px;
+}
+
+#githublink {
+position:absolute;
+top:5px;
+right:5px;
+}
+
+
+#title {
+text-align:center;
+font-size:32px;
+margin-top:15px;
+margin-bottom:5px;
+}
+
+
+div.heading {
+font-size:18px;
+margin-top:50px;
+margin-bottom:15px;
+}
+
+
+#scaleselectors {
+margin-bottom:50px;
+}
+
+#scaleinfo, #chordinfo {
+text-align:center;
+margin-top:30px;
+margin-bottom:10px;
+}
+
+select {
+padding: 5px 8px;
+/*border: solid 1px #444444;*/
+height:25px;
+font-size:12px;
+box-shadow: none;
+background: transparent;
+background-image: none;
+}
+
+#footer {
+margin-left:auto;
+margin-right:auto;
+margin-top:20px;
+width:100%;
+padding-bottom:5px;
+text-align:center;
+color:#A0A0A0;
+font-size:9pt;
+}

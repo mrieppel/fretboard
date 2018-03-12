@@ -1,0 +1,256 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<title>Fretboard</title>
+
+<script src="d3.min.js"></script>
+<script src="script.js"></script>
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
+
+</head>
+<body onload="putScale();putChord();">
+
+<div id="content">
+
+<div id='githublink'><a href='https://github.com/mrieppel/fretboard'><img src="github.png" style="height:25px;"></img></a></div>
+
+<div id="title">Fretboard: a Guitar Theory App</div>
+
+<div class="heading">I. Chords</div>
+
+<p class="info">The fretboard below shows the location of every note that occurs in a given chord  along the length of the fretboard. In the dropdown menus underneath the fretboard, you can select which chord's notes you want to display.  Here you can specify (i) the root note, (ii) the type of chord, and (iii) the tuning that the guitar is in.</p>
+
+<div id="chordinfo"></div>
+
+
+<svg id="chordboard" width="775" height="200">
+
+	<line x1="54" y1="25" x2="54" y2="150" stroke-width="8" stroke="black"/>
+
+	<g id="frets" transform="translate(0,25)">
+		<line x1="105" y1="0" x2="105" y2="125" stroke-width="2" stroke="black"/>
+		<line x1="155" y1="0" x2="155" y2="125" stroke-width="2" stroke="black"/>
+			<circle cx="180" cy="62" r="5" stroke="black" stroke-width="1" fill="black"/>
+		<line x1="205" y1="0" x2="205" y2="125" stroke-width="2" stroke="black"/>
+		<line x1="255" y1="0" x2="255" y2="125" stroke-width="2" stroke="black"/>
+			<circle cx="280" cy="62" r="5" stroke="black" stroke-width="1" fill="black"/>
+		<line x1="305" y1="0" x2="305" y2="125" stroke-width="2" stroke="black"/>
+		<line x1="355" y1="0" x2="355" y2="125" stroke-width="2" stroke="black"/>
+			<circle cx="380" cy="37" r="5" stroke="black" stroke-width="1" fill="black"/>
+			<circle cx="380" cy="87" r="5" stroke="black" stroke-width="1" fill="black"/>
+		<line x1="405" y1="0" x2="405" y2="125" stroke-width="2" stroke="black"/>
+		<line x1="455" y1="0" x2="455" y2="125" stroke-width="2" stroke="black"/>
+			<circle cx="480" cy="62" r="5" stroke="black" stroke-width="1" fill="black"/>
+		<line x1="505" y1="0" x2="505" y2="125" stroke-width="2" stroke="black"/>
+		<line x1="555" y1="0" x2="555" y2="125" stroke-width="2" stroke="black"/>
+		<line x1="605" y1="0" x2="605" y2="125" stroke-width="2" stroke="black"/>
+			<circle cx="630" cy="37" r="5" stroke="black" stroke-width="1" fill="black"/>
+			<circle cx="630" cy="87" r="5" stroke="black" stroke-width="1" fill="black"/>
+		<line x1="655" y1="0" x2="655" y2="125" stroke-width="2" stroke="black"/>
+		<line x1="705" y1="0" x2="705" y2="125" stroke-width="2" stroke="black"/>
+		<line x1="755" y1="0" x2="755" y2="125" stroke-width="2" stroke="black"/>
+	</g>
+	
+
+	<g class="string" id="s1" transform="translate(0,25)">
+		<line x1="50" y1="0" x2="770" y2="0" stroke-width="1" stroke="black"/>
+	</g>
+	
+	<g class="string" id="s2" transform="translate(0,50)">
+		<line x1="50" y1="0" x2="770" y2="0" stroke-width="1" stroke="black"/>
+	</g>
+	
+	<g class="string" id="s3" transform="translate(0,75)">
+		<line x1="50" y1="0" x2="770" y2="0" stroke-width="1" stroke="black"/>
+	</g>
+	
+	<g class="string" id="s4" transform="translate(0,100)">
+		<line x1="50" y1="0" x2="770" y2="0" stroke-width="1" stroke="black"/>
+	</g>
+
+	<g class="string" id="s5" transform="translate(0,125)">
+		<line x1="50" y1="0" x2="770" y2="0" stroke-width="1" stroke="black"/>
+	</g>
+	
+	<g class="string" id="s6" transform="translate(0,150)">
+		<line x1="50" y1="0" x2="770" y2="0" stroke-width="1" stroke="black"/>
+	</g>
+	
+         
+</svg>
+
+<div id="chordselectors">
+
+<select id="chordroot" onchange="putChord();">
+<option value="C">C</option>
+<option value="C#">C&#9839;</option>
+<option value="Db">D&#9837;</option>
+<option value="D">D</option>
+<option value="D#">D&#9839;</option>
+<option value="Eb">E&#9837;</option>
+<option value="E">E</option>
+<option value="F">F</option>
+<option value="F#">F&#9839;</option>
+<option value="Gb">G&#9837;</option>
+<option value="G#">G&#9839;</option>
+<option value="G">G</option>
+<option value="Ab">A&#9837;</option>
+<option value="A">A</option>
+<option value="A#">A&#9839;</option>
+<option value="Bb">B&#9837;</option>
+<option value="B">B</option>
+<option value="B#">B&#9839;</option>
+</select>
+
+<select id="chordmode" onchange="putChord();">
+<option value="2,2,1,2,2,2,1">maj</option>
+<option value="2,1,2,2,1,2,2">min</option>
+<option value="2,2,1,3,1,2,1">aug</option>
+<option value="2,1,2,1,2,2,2">dim</option>
+<option value="2,2,1,2,2,2,1">sus4</option>
+<option value="2,2,1,2,2,2,1">maj6</option>
+<option value="2,1,2,2,2,1,2">min6</option>
+<option value="2,2,1,2,2,1,2">7</option>
+<option value="2,2,1,2,2,2,1">maj7</option>
+<option value="2,1,2,2,1,2,2">min7</option>
+<option value="2,1,2,1,2,1,3">dim7</option>
+
+</select>
+
+<select id="chordtuning" onchange="putChord();">
+<option value="E,A,D,G,B,E">Standard Tuning</option>
+<option value="D,A,D,G,B,E">Drop D</option>
+<option value="D,A,D,F#,A,D">Open D</option>
+<option value="E,B,E,G#,B,E">Open E</option>
+<option value="D,G,D,G,B,D">Open G</option>
+<option value="D,D,D,D,D,D">Ostrich</option>
+</select>
+
+
+</div> <!-- Close chordselectors div -->
+
+
+<div class="heading">II. Scales</div>
+
+<p class="info">The fretboard below shows the location of every note that occurs in a given scale along the length of the fretboard. In the dropdown menus underneath the fretboard, you can select the key for which you want to display a scale.  Here you can specify (i) the root note, (ii) the mode of the key, and (iii) the tuning that the guitar is in.</p>
+
+<div id="scaleinfo"></div>
+
+<svg id="fretboard" width="775" height="200">
+
+	<line x1="54" y1="25" x2="54" y2="150" stroke-width="8" stroke="black"/>
+
+	<g id="frets" transform="translate(0,25)">
+		<line x1="105" y1="0" x2="105" y2="125" stroke-width="2" stroke="black"/>
+		<line x1="155" y1="0" x2="155" y2="125" stroke-width="2" stroke="black"/>
+			<circle cx="180" cy="62" r="5" stroke="black" stroke-width="1" fill="black"/>
+		<line x1="205" y1="0" x2="205" y2="125" stroke-width="2" stroke="black"/>
+		<line x1="255" y1="0" x2="255" y2="125" stroke-width="2" stroke="black"/>
+			<circle cx="280" cy="62" r="5" stroke="black" stroke-width="1" fill="black"/>
+		<line x1="305" y1="0" x2="305" y2="125" stroke-width="2" stroke="black"/>
+		<line x1="355" y1="0" x2="355" y2="125" stroke-width="2" stroke="black"/>
+			<circle cx="380" cy="37" r="5" stroke="black" stroke-width="1" fill="black"/>
+			<circle cx="380" cy="87" r="5" stroke="black" stroke-width="1" fill="black"/>
+		<line x1="405" y1="0" x2="405" y2="125" stroke-width="2" stroke="black"/>
+		<line x1="455" y1="0" x2="455" y2="125" stroke-width="2" stroke="black"/>
+			<circle cx="480" cy="62" r="5" stroke="black" stroke-width="1" fill="black"/>
+		<line x1="505" y1="0" x2="505" y2="125" stroke-width="2" stroke="black"/>
+		<line x1="555" y1="0" x2="555" y2="125" stroke-width="2" stroke="black"/>
+		<line x1="605" y1="0" x2="605" y2="125" stroke-width="2" stroke="black"/>
+			<circle cx="630" cy="37" r="5" stroke="black" stroke-width="1" fill="black"/>
+			<circle cx="630" cy="87" r="5" stroke="black" stroke-width="1" fill="black"/>
+		<line x1="655" y1="0" x2="655" y2="125" stroke-width="2" stroke="black"/>
+		<line x1="705" y1="0" x2="705" y2="125" stroke-width="2" stroke="black"/>
+		<line x1="755" y1="0" x2="755" y2="125" stroke-width="2" stroke="black"/>
+	</g>
+	
+
+	<g class="string" id="s1" transform="translate(0,25)">
+		<line x1="50" y1="0" x2="770" y2="0" stroke-width="1" stroke="black"/>
+	</g>
+	
+	<g class="string" id="s2" transform="translate(0,50)">
+		<line x1="50" y1="0" x2="770" y2="0" stroke-width="1" stroke="black"/>
+	</g>
+	
+	<g class="string" id="s3" transform="translate(0,75)">
+		<line x1="50" y1="0" x2="770" y2="0" stroke-width="1" stroke="black"/>
+	</g>
+	
+	<g class="string" id="s4" transform="translate(0,100)">
+		<line x1="50" y1="0" x2="770" y2="0" stroke-width="1" stroke="black"/>
+	</g>
+
+	<g class="string" id="s5" transform="translate(0,125)">
+		<line x1="50" y1="0" x2="770" y2="0" stroke-width="1" stroke="black"/>
+	</g>
+	
+	<g class="string" id="s6" transform="translate(0,150)">
+		<line x1="50" y1="0" x2="770" y2="0" stroke-width="1" stroke="black"/>
+	</g>
+	
+         
+</svg>
+
+<br>
+
+
+<div id="scaleselectors">
+
+<select id="scaleroot" onchange="putScale();">
+<option value="C">C</option>
+<option value="C#">C&#9839;</option>
+<option value="Db">D&#9837;</option>
+<option value="D">D</option>
+<option value="D#">D&#9839;</option>
+<option value="Eb">E&#9837;</option>
+<option value="E">E</option>
+<option value="F">F</option>
+<option value="F#">F&#9839;</option>
+<option value="Gb">G&#9837;</option>
+<option value="G#">G&#9839;</option>
+<option value="G">G</option>
+<option value="Ab">A&#9837;</option>
+<option value="A">A</option>
+<option value="A#">A&#9839;</option>
+<option value="Bb">B&#9837;</option>
+<option value="B">B</option>
+<option value="B#">B&#9839;</option>
+</select>
+
+<select id="scalemode" onchange="putScale();">
+<option value="2,2,1,2,2,2,1">Major</option>
+<option value="2,1,2,2,1,2,2">Minor</option>
+<option value="2,2,1,2,2,2,1">Maj. Pentatonic</option>
+<option value="2,1,2,2,1,2,2">Min. Pentatonic</option>
+<option value="2,1,2,1,1,1,2,2">Blues</option>
+<option value="2,1,2,2,2,1,2">Dorian</option>
+<option value="1,2,2,2,1,2,2">Phrygian</option>
+<option value="2,2,2,1,2,2,1">Lydian</option>
+<option value="2,2,1,2,2,1,2">Mixolydian</option>
+<option value="1,2,2,1,2,2,2">Locrian</option>
+</select>
+
+<select id="scaletuning" onchange="putScale();">
+<option value="E,A,D,G,B,E">Standard Tuning</option>
+<option value="D,A,D,G,B,E">Drop D</option>
+<option value="D,A,D,F#,A,D">Open D</option>
+<option value="E,B,E,G#,B,E">Open E</option>
+<option value="D,G,D,G,B,D">Open G</option>
+<option value="D,D,D,D,D,D">Ostrich</option>
+</select>
+
+
+</div> <!-- Close scaleselectors div -->
+
+
+</div> <!-- Close container div -->
+
+<div id='footer'>&copy; 2018 Michael Rieppel</div>
+
+</body>
+</html>
