@@ -1,7 +1,7 @@
 Fretboard
 =========
 
-Fretboard is a guitar theory app that lets users see where the notes corresponding to a given chord, or to a complete scale, occur along the length of a guitar's fretboard.  For chords, users can specify the root note, type of chord, and guitar tuning.  Similarly, for scales users can specify the root note, scale mode, and guitar tuning.  The fretboard is drawn using the [D3.js](http://d3js.org/) library.
+Fretboard is a guitar theory app that lets users see where the notes corresponding to a given chord, or to a complete scale, occur along the length of a guitar's fretboard.  For chords, users can specify the root note, type of chord, and guitar tuning.  Similarly, for scales.  The fretboard is drawn using the [D3.js](http://d3js.org/) library.
 
 A live version is [here](http://mrieppel.github.io/fretboard/)
 
