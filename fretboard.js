@@ -106,6 +106,7 @@ function getChord(scale,mode) {
 		case "dim" : return [scale[0],scale[2],scale[4]];
 		case "dim7" : return [scale[0],scale[2],scale[4],scale[6]];
 		case "sus4" : return [scale[0],scale[3],scale[4]];
+		case "9" : return [scale[0],scale[1],scale[2],scale[4],scale[6]];
 		default : return scale;
 	}
 }
