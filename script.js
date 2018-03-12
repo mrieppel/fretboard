@@ -213,7 +213,7 @@ function drawopennotes(id,tuning) {
 		.attr("y",5)
 		.attr("class","opennote")
 		.style("font-family","Verdana")
-		.style("font-size","14")
+		.style("font-size","14px")
 		.text(function (d) {return d;});
 	
 	y.exit().remove();
@@ -252,7 +252,7 @@ function drawnotes(id,string,frets) {
 		.attr("y", 4)
 		.attr("class","note")
 		.style("font-family","Verdana")
-		.style("font-size","11")
+		.style("font-size","11px")
 		.text(d => d[1]);
 		
 	t.data(frets).enter()
@@ -261,7 +261,7 @@ function drawnotes(id,string,frets) {
 		.attr("y", 4)
 		.attr("class","note")
 		.style("font-family","Verdana")
-		.style("font-size","11")
+		.style("font-size","11px")
 		.text(d => d[1]);
 		
 	t.exit().remove();
