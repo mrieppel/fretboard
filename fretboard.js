@@ -220,8 +220,12 @@ function putProg() {
 function makeTable(scale,mode) {
 	var pattern = (mode=="Major" ? ["","m","m","","","m","dim"] : ["m","dim","","m","m","",""]);
 	
-	var pre = '<table id="progtable"><tr><td></td><td>I</td><td>ii</td><td>iii</td><td>IV</td><td>V</td><td>vi</td><td>vii</td></tr><tr id="divider"><td class = "label">Chord:</td>';
-	var end = '</table>';
+	var majnum = '<td>I</td><td>ii</td><td>iii</td><td>IV</td><td>V</td><td>vi</td><td>vii</td>';
+	var minnum = '<td>i</td><td>ii</td><td>III</td><td>iv</td><td>v</td><td>VI</td><td>VII</td>';
+	var pre = '<table id="progtable"><tr><td></td>';
+	
+	pre += (mode=="Major" ? majnum : minnum);
+	pre += '</tr><tr id="divider"><td class = "label">Chord:</td>';
 	
 	for(var i=0;i<7;i++) {
 		pre += '<td>'+scale[i]+pattern[i]+'</td>';
@@ -234,13 +238,13 @@ function makeTable(scale,mode) {
 	for(var i=0;i<7;i++) {
 		pre += '<td>'+scale[(i+2)%7]+'</td>';
 	}
-	pre += '</tr><td></td>';
+	pre += '</tr><tr><td></td>';
 	for(var i=0;i<7;i++) {
 		pre += '<td>'+scale[(i+4)%7]+'</td>';
 	}
-	pre += '</tr>';
+	pre += '</tr></table>';
 	
-	return pre+end;
+	return pre;
 }
 	
 	
