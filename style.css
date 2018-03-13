@@ -26,8 +26,16 @@ right:5px;
 
 #title {
 text-align:center;
-font-size:32px;
+font-size:34px;
 margin-top:15px;
+margin-bottom:0px;
+}
+
+
+#subtitle {
+text-align:center;
+font-size:16px;
+margin-top:10px;
 margin-bottom:5px;
 }
 
@@ -39,14 +47,10 @@ margin-bottom:15px;
 }
 
 
-#scaleselectors {
-margin-bottom:50px;
-}
-
 #scaleinfo, #chordinfo {
 text-align:center;
 margin-top:30px;
-margin-bottom:10px;
+margin-bottom:15px;
 }
 
 select {
@@ -59,10 +63,38 @@ font-size: 12px;
 overflow: hidden;
 }
 
+#progdiv {
+margin-top:20px;
+margin-bottom:0px;
+}
+
+#progtable {
+border:none;
+border-collapse:collapse;
+margin: 0 auto 0 auto;
+}
+
+#progtable tr#divider {
+border-bottom:solid 1px #444444;
+}
+
+#progtable td {
+min-width:50px;
+}
+
+#progtable td.label {
+min-width:75px;
+}
+
+#progselectors {
+margin-bottom:30px;
+}
+
+
 #footer {
 margin-left:auto;
 margin-right:auto;
-margin-top:20px;
+margin-top:50px;
 width:100%;
 padding-bottom:5px;
 text-align:center;

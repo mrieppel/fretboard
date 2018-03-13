@@ -10,17 +10,18 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 
 </head>
-<body onload="putScale();putChord();">
+<body onload="putScale();putChord();putProg();">
 
 <div id="content">
 
 <div id='githublink'><a href='https://github.com/mrieppel/fretboard/'><img src="github.png" style="height:25px;"></img></a></div>
 
-<div id="title">Fretboard: a Guitar Theory App</div>
+<div id="title">Fretboard</div>
+<div id="subtitle">Guitar Theory Visualization</div>
 
 <div class="heading">I. Chords</div>
 
-<p class="info">The fretboard below shows the location of every note that occurs in a given chord  along the length of the fretboard. In the dropdown menus underneath the fretboard, you can select which chord's notes you want to display.  Here you can specify (i) the root note, (ii) the type of chord, and (iii) the tuning that the guitar is in. Note that the plain 7th and 9th chords here are technically the "dominant 7th" and "dominant 9th."</p>
+<p class="info">The fretboard below shows the location of every note that occurs in a given chord  along the length of the fretboard. In the dropdown menus underneath the fretboard, you can select which chord's notes you want to display.  Here you can specify (i) the root note, (ii) the type of chord, and (iii) the tuning that the guitar is in.</p>
 
 <div id="chordinfo"></div>
 
@@ -273,6 +274,51 @@
 
 
 </div> <!-- Close scaleselectors div -->
+
+
+<div class="heading">III. Putting it Together: Chord Progressions</div>
+
+<p class="info">The table below displays the seven chords based on a given key/scale. In the drop down menu you can select the root note and the key (major or minor) for which you want to display the chords.</p>
+
+<p>Chords based on <span id="keyspan">C Major</span>:</p>
+
+
+<div id="progdiv"></div> <!-- Close progdiv div -->
+
+<div id="progselectors">
+
+<select id="progroot" onchange="putProg();">
+<option value="C" selected>C</option>
+<option value="C#">C&#9839;</option>
+<option value="Db">D&#9837;</option>
+<option value="D">D</option>
+<option value="D#">D&#9839;</option>
+<option value="Eb">E&#9837;</option>
+<option value="E">E</option>
+<option value="F">F</option>
+<option value="F#">F&#9839;</option>
+<option value="Gb">G&#9837;</option>
+<option value="G#">G&#9839;</option>
+<option value="G">G</option>
+<option value="Ab">A&#9837;</option>
+<option value="A">A</option>
+<option value="A#">A&#9839;</option>
+<option value="Bb">B&#9837;</option>
+<option value="B">B</option>
+<option value="B#">B&#9839;</option>
+</select>
+
+<select id="progmode" onchange="putProg();">
+<option value="2,2,1,2,2,2,1" selected>Major</option>
+<option value="2,1,2,2,1,2,2">Minor</option>
+</select>
+
+</div> <!-- Close progselectors div -->
+
+
+
+<p>Here's a <a href="http://musictheorysite.com/namethatkey/">nice program</a> from the MusicTheorySite for going in the other direction: determining the key on the basis of a chord progression.</p>
+
 
 
 </div> <!-- Close container div -->

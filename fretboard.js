@@ -40,7 +40,7 @@ function putScale() {
 	var boardnotes = putLetters(boardnotes,dict);
 	
 	var scalestr = scale.map(x => dict[x]).join(","); // String description of scale
-	d3.select("#scaleinfo").html(root+" "+mode+" Scale: "+scalestr);
+	d3.select("#scaleinfo").html(dict[NOTES[root]]+" "+mode+" Scale: "+scalestr);
 
 	drawopennotes("fretboard",tuning);
 	for(var i=0;i<boardnotes.length;i++) {
@@ -80,7 +80,7 @@ function putChord() {
 	var boardnotes = putLetters(boardnotes,dict);
 	
 	var chordstr = chord.map(x => dict[x]).join(",");
-	d3.select("#chordinfo").html(root+mode+" Chord: "+chordstr);
+	d3.select("#chordinfo").html(dict[NOTES[root]]+mode+" Chord: "+chordstr);
 	
  	drawopennotes("chordboard",tuning);
  	for(var i=0;i<boardnotes.length;i++) {
@@ -110,8 +110,11 @@ function getChord(scale,mode) {
 
 // Takes a scale (array of integers) and a root (e.g. "C"), and returns the appropriate 
 // names for the other notes in the scale (determines whether e.g. C#, represented as an
-// int 1 in the scale, should be called "C#" or "Db"
+// int 1 in the scale, should be called "C#" or "Db").  Flats and sharps get returned
+// in unicode.
 function scaleDict(scale,root) {
+	root = root.replace(/b/g,'\u266D');
+	root = root.replace(/#/g,'\u266F');
 	var test = root;
 	var out = {};
 	out[scale[0]] = root;
@@ -123,18 +126,18 @@ function scaleDict(scale,root) {
 	
 	function getLet(n,str) {
 		switch(n) {
-			case 0 : return str.indexOf("C")<0 ? "C" : "B#";
-			case 1 : return str.indexOf("C")<0 ? "C#" : "Db";
+			case 0 : return str.indexOf("C")<0 ? "C" : "B\u266F";
+			case 1 : return str.indexOf("C")<0 ? "C\u266F" : "D\u266D";
 			case 2 : return "D";
-			case 3 : return str.indexOf("D")<0 ? "D#" : "Eb";
+			case 3 : return str.indexOf("D")<0 ? "D\u266F" : "E\u266D";
 			case 4 : return "E";
-			case 5 : return str.indexOf("F")<0 ? "F" : "E#";
-			case 6 : return str.indexOf("F")<0 ? "F#" : "Gb";
+			case 5 : return str.indexOf("F")<0 ? "F" : "E\u266F";
+			case 6 : return str.indexOf("F")<0 ? "F\u266F" : "G\u266D";
 			case 7 : return "G";
-			case 8 : return str.indexOf("G")<0 ? "G#" : "Ab";
+			case 8 : return str.indexOf("G")<0 ? "G\u266F" : "A\u266D";
 			case 9 : return "A";
-			case 10 : return str.indexOf("A")<0 ? "A#" : "Bb";
-			case 11 : return str.indexOf("B")<0 ? "B" : "Cb";		
+			case 10 : return str.indexOf("A")<0 ? "A\u266F" : "B\u266D";
+			case 11 : return str.indexOf("B")<0 ? "B" : "C\u266D";		
 		}
 	}
 }
@@ -192,6 +195,55 @@ function putLetters(board,dict) {
 		});});
 }
 
+
+// Main function to collect user input and display the appropriate chord progression
+function putProg() {
+	var root = document.getElementById('progroot').value;
+	var m = document.getElementById('progmode'); 
+	
+	var mode = m.options[m.selectedIndex].text; // name of mode
+	var modear = m.value.split(",").map(x => parseInt(x)); // interval array for mode
+	
+	
+	var scale = makeScale(modear,NOTES[root]);
+		
+	var dict = scaleDict(scale,root);
+	
+	var scalenotes = scale.map(x => dict[x]); // Put letters for scale notes
+	
+	d3.select("#keyspan").html(dict[NOTES[root]]+" "+mode);
+	d3.select("#progdiv").html(makeTable(scalenotes,mode));
+}
+
+// Takes a scale (array of ints) and the name of a mode (either "Major" or "Minor") and
+// builds and html table for the chord progression based on that scale. 
+function makeTable(scale,mode) {
+	var pattern = (mode=="Major" ? ["","m","m","","","m","dim"] : ["m","dim","","m","m","",""]);
+	
+	var pre = '<table id="progtable"><tr><td></td><td>I</td><td>ii</td><td>iii</td><td>IV</td><td>V</td><td>vi</td><td>vii</td></tr><tr id="divider"><td class = "label">Chord:</td>';
+	var end = '</table>';
+	
+	for(var i=0;i<7;i++) {
+		pre += '<td>'+scale[i]+pattern[i]+'</td>';
+	}
+	pre += '</tr><tr><td class = "label">Triad:</td>';
+	for(var i=0;i<7;i++) {
+		pre += '<td>'+scale[i]+'</td>';
+	}
+	pre += '</tr><tr><td></td>';
+	for(var i=0;i<7;i++) {
+		pre += '<td>'+scale[(i+2)%7]+'</td>';
+	}
+	pre += '</tr><td></td>';
+	for(var i=0;i<7;i++) {
+		pre += '<td>'+scale[(i+4)%7]+'</td>';
+	}
+	pre += '</tr>';
+	
+	return pre+end;
+}
+	
+	
 
 // BELOW ARE FUNCTIONS TO DRAW TO SVG USING D3
 
