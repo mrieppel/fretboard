@@ -46,6 +46,15 @@ margin-top:50px;
 margin-bottom:15px;
 }
 
+#chordboard circle.note {
+fill:rgb(247,148,89);
+fill-opacity:05;
+}
+
+#scaleboard circle.note {
+fill:rgb(143, 154, 249);
+fill-opacity:1;
+}
 
 #scaleinfo, #chordinfo {
 text-align:center;

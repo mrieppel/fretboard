@@ -42,9 +42,9 @@ function putScale() {
 	var scalestr = scale.map(x => dict[x]).join(","); // String description of scale
 	d3.select("#scaleinfo").html(dict[NOTES[root]]+" "+mode+" Scale: "+scalestr);
 
-	drawopennotes("fretboard",tuning);
+	drawopennotes("scaleboard",tuning);
 	for(var i=0;i<boardnotes.length;i++) {
-		drawnotes("fretboard",i+1,boardnotes[i]);
+		drawnotes("scaleboard",i+1,boardnotes[i]);
 	}
 }
 
@@ -279,9 +279,7 @@ function drawnotes(id,string,frets) {
 		.attr("cy", 0)
 		.attr("class","note")
 		.style("stroke","black")
-		.style("stroke-width","1")
-		.style("fill","RGB(247,148,89)")
-		.style("fill-opacity","1");
+		.style("stroke-width","1");
 	
 	c.enter()
 		.append("circle")
@@ -290,9 +288,7 @@ function drawnotes(id,string,frets) {
 		.attr("cy", 0)
 		.attr("class","note")
 		.style("stroke","black")
-		.style("stroke-width","1")
-		.style("fill","RGB(247,148,89)")
-		.style("fill-opacity","1");
+		.style("stroke-width","1");
 	
 	c.exit().remove();
 
