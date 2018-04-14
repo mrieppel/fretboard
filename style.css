@@ -48,11 +48,11 @@ margin-bottom:15px;
 
 #chordboard circle.note {
 fill:rgb(247,148,89);
-fill-opacity:05;
+fill-opacity:1;
 }
 
 #scaleboard circle.note {
-fill:rgb(143, 154, 249);
+fill:rgb(143,154,249);
 fill-opacity:1;
 }
 
